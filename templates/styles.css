@@ -1,0 +1,147 @@
+/* Estilos Globales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #f0f0f0, #dcdcdc);
+    color: #333;
+    padding: 30px;
+    height: 100vh;
+}
+
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    border-top: 5px solid #3e8e41;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2.2rem;
+    color: #3e8e41;
+    font-weight: 600;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+label {
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: #444;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+select,
+button {
+    padding: 14px 18px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #3e8e41;
+    box-shadow: 0 0 8px rgba(62, 142, 65, 0.4);
+}
+
+button {
+    background-color: #3e8e41;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #2f6a29;
+    transform: translateY(-3px);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+.message {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.success-message {
+    color: #4CAF50;
+}
+
+.error-message {
+    color: #f44336;
+}
+
+.btn-container {
+    text-align: center;
+}
+
+.user-list {
+    margin-top: 40px;
+    border-top: 2px solid #ddd;
+    padding-top: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #fafafa;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+}
+
+li:hover {
+    background-color: #f0f0f0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Diseño Responsivo */
+@media (max-width: 768px) {
+    .container {
+        padding: 30px;
+        max-width: 90%;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    button {
+        padding: 12px;
+    }
+
+    label,
+    input,
+    select {
+        font-size: 1rem;
+    }
+}

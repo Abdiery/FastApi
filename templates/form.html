@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Form</title>
+    <title>Registro de Estudiantes</title>
+    <link rel="stylesheet" href="/static/styles.css">
     <style>
-        /* Reset básico */
+        /* Estilos globales */
         * {
             margin: 0;
             padding: 0;
@@ -13,69 +14,84 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f9;
+            font-family: 'Roboto', sans-serif;
+            background-color: #e1f5fe;
             color: #333;
-            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
 
         h1 {
-            text-align: center;
+            font-size: 2.5rem;
+            color: #1e88e5;
             margin-bottom: 20px;
-            color: #4CAF50;
+            text-align: center;
         }
 
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
+        .card {
+            background-color: white;
+            border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
         }
 
-        form {
+        .card form {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
         }
 
-        label {
+        .card label {
+            font-size: 1.1rem;
             font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
         }
 
-        input[type="text"],
-        input[type="email"],
-        input[type="number"],
-        button {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
+        .card input[type="text"],
+        .card input[type="email"],
+        .card input[type="date"],
+        .card select {
+            padding: 12px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
         }
 
-        input:focus {
-            outline: none;
-            border-color: #4CAF50;
-            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        .card input[type="text"]:focus,
+        .card input[type="email"]:focus,
+        .card input[type="date"]:focus,
+        .card select:focus {
+            border-color: #1e88e5;
+            box-shadow: 0 0 8px rgba(30, 136, 229, 0.4);
         }
 
-        button {
-            background-color: #4CAF50;
+        .card button {
+            padding: 14px;
+            background-color: #1e88e5;
             color: white;
             border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
         }
 
-        button:hover {
-            background-color: #45a049;
+        .card button:hover {
+            background-color: #1565c0;
         }
 
         .message {
-            margin-top: 10px;
-            text-align: center;
-            font-size: 14px;
+            margin-top: 20px;
+            font-size: 1.1rem;
+            color: #333;
         }
 
         .success-message {
@@ -86,137 +102,69 @@
             color: #f44336;
         }
 
-        ul {
-            list-style-type: none;
-            margin-top: 20px;
-            padding: 0;
-        }
-
-        li {
-            background: #f9f9f9;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-bottom: 5px;
-        }
-
-        /* Estilo para el modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
+        .btn-container {
+            margin-top: 30px;
             text-align: center;
-            width: 300px;
         }
 
-        .close-modal {
+        .btn-container a {
+            text-decoration: none;
+        }
+
+        .btn-container button {
             background-color: #4CAF50;
+            padding: 12px 25px;
+            font-size: 1.2rem;
             color: white;
-            padding: 5px 10px;
             border: none;
-            cursor: pointer;
-            margin-top: 10px;
+            border-radius: 8px;
         }
 
-        .close-modal:hover {
+        .btn-container button:hover {
             background-color: #45a049;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Create User</h1>
-        <!-- Formulario de creación de usuarios -->
+    <div class="card">
+        <h1>Registro de Estudiante</h1>
+
+        <!-- Formulario de creación de estudiantes -->
         <form method="post" action="/users/">
-            <label for="name">Name:</label>
+            <label for="name">Nombre Completo:</label>
             <input type="text" id="name" name="name" required>
 
-            <label for="email">Email:</label>
+            <label for="email">Correo Electrónico:</label>
             <input type="email" id="email" name="email" required>
 
-            <label for="age">Age:</label>
-            <input type="number" id="age" name="age" min="0" required>
+            <label for="year_of_birth">Fecha de Nacimiento:</label>
+            <input type="date" id="year_of_birth" name="year_of_birth" min="1900-01-01" max="{{ max_date }}" required>
 
-            <button type="submit">Submit</button>
+            <label for="career">Carrera:</label>
+            <select name="career" required>
+                <option value="desarrollo_software">Desarrollo de Software</option>
+                <option value="ciencia_datos">Ciencia de Datos</option>
+                <option value="redes">Redes</option>
+                <option value="multimedia">Multimedia</option>
+            </select>
+
+            <button type="submit">Registrar Estudiante</button>
         </form>
 
-        <!-- Mostrar mensajes -->
+        <!-- Mensajes de éxito o error -->
         {% if message %}
-        <div id="message" data-message="{{ message }}"></div>
+        <div class="message success-message">{{ message }}</div>
         {% endif %}
         {% if error %}
-        <div id="error" data-message="{{ error }}"></div>
+        <div class="message error-message">{{ error }}</div>
         {% endif %}
 
-        <!-- Lista de usuarios -->
-        <h2>Users</h2>
-        <ul>
-            {% for user in users %}
-            <li>
-                {{ user.name }} ({{ user.email }}) - Age: {{ user.age }}
-                <!-- Formulario para eliminar usuario -->
-                <form method="post" action="/users/{{ user.id }}/delete" style="display:inline;">
-                    <button type="submit" title="Delete user" style="background:none;border:none;cursor:pointer;">
-                        🗑️
-                    </button>
-                </form>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal" id="messageModal">
-        <div class="modal-content">
-            <p id="modalMessage"></p>
-            <button class="close-modal" onclick="closeModal()">OK</button>
+        <!-- Botón para ver la lista de usuarios registrados -->
+        <div class="btn-container">
+            <a href="/users/list">
+                <button>Ver Estudiantes Registrados</button>
+            </a>
         </div>
     </div>
-
-    <script>
-        // Extraer el mensaje de los elementos con id 'message' y 'error'
-        const message = document.getElementById('message') ? document.getElementById('message').dataset.message : null;
-        const error = document.getElementById('error') ? document.getElementById('error').dataset.message : null;
-
-        if (message) {
-            showModal(message);
-        }
-        if (error) {
-            showModal(error);
-        }
-
-        function showModal(message) {
-            const modal = document.getElementById('messageModal');
-            const modalMessage = document.getElementById('modalMessage');
-            modalMessage.textContent = message;
-            modal.style.display = 'flex';
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('messageModal');
-            modal.style.display = 'none';
-        }
-    </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-

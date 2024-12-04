@@ -4,10 +4,3 @@ sqlalchemy
 jinja2
 pydantic
 sqlite3
-
-
-Accede a la documentación automática de la API en:
-http://127.0.0.1:8000/docs
-
-Y el formulario estará disponible en:
-http://127.0.0.1:8000/

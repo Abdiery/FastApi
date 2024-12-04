@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Estudiantes Registrados</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        /* Estilos básicos para la página */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .success-message {
+            color: #4CAF50;
+        }
+
+        .error-message {
+            color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Estudiantes Registrados</h1>
+
+        <!-- Tabla de usuarios registrados -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Correo Electrónico</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Carrera</th>
+                    <th>Edad</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.year_of_birth.strftime('%d-%m-%Y') }}</td>
+                    <td>{{ user.career }}</td>
+                    <td>{{ user.age }} años</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+
+        <!-- Mensajes de éxito o error -->
+        {% if message %}
+        <div class="message success-message">{{ message }}</div>
+        {% endif %}
+        {% if error %}
+        <div class="message error-message">{{ error }}</div>
+        {% endif %}
+
+        <!-- Botón para volver al formulario de registro -->
+        <div class="btn-container">
+            <a href="/">
+                <button>Registrar Nuevo Estudiante</button>
+            </a>
+        </div>
+
+    </div>
+</body>
+</html>
